@@ -1,0 +1,10 @@
+D:\OneDrive - ss.z\Рофланы\RiderProjects\evolution\evaluateKsam\bin\Debug\evaluateKsam.exe.config
+D:\OneDrive - ss.z\Рофланы\RiderProjects\evolution\evaluateKsam\bin\Debug\evaluateKsam.exe
+D:\OneDrive - ss.z\Рофланы\RiderProjects\evolution\evaluateKsam\bin\Debug\evaluateKsam.pdb
+D:\OneDrive - ss.z\Рофланы\RiderProjects\evolution\evaluateKsam\obj\Debug\evaluateKsam.csprojAssemblyReference.cache
+D:\OneDrive - ss.z\Рофланы\RiderProjects\evolution\evaluateKsam\obj\Debug\evaluateKsam.Properties.Resources.resources
+D:\OneDrive - ss.z\Рофланы\RiderProjects\evolution\evaluateKsam\obj\Debug\evaluateKsam.csproj.GenerateResource.cache
+D:\OneDrive - ss.z\Рофланы\RiderProjects\evolution\evaluateKsam\obj\Debug\evaluateKsam.csproj.CoreCompileInputs.cache
+D:\OneDrive - ss.z\Рофланы\RiderProjects\evolution\evaluateKsam\obj\Debug\evaluateKsam.exe
+D:\OneDrive - ss.z\Рофланы\RiderProjects\evolution\evaluateKsam\obj\Debug\evaluateKsam.pdb
+D:\OneDrive - ss.z\Рофланы\RiderProjects\evolution\evaluateKsam\obj\Debug\evaluateKsam.Border.resources

@@ -1,0 +1,9 @@
+D:\OneDrive - ss.z\Рофланы\RiderProjects\evolution\evolution\bin\Debug\evolution.exe.config
+D:\OneDrive - ss.z\Рофланы\RiderProjects\evolution\evolution\bin\Debug\evolution.exe
+D:\OneDrive - ss.z\Рофланы\RiderProjects\evolution\evolution\bin\Debug\evolution.pdb
+D:\OneDrive - ss.z\Рофланы\RiderProjects\evolution\evolution\obj\Debug\evolution.csprojAssemblyReference.cache
+D:\OneDrive - ss.z\Рофланы\RiderProjects\evolution\evolution\obj\Debug\evolution.Properties.Resources.resources
+D:\OneDrive - ss.z\Рофланы\RiderProjects\evolution\evolution\obj\Debug\evolution.csproj.GenerateResource.cache
+D:\OneDrive - ss.z\Рофланы\RiderProjects\evolution\evolution\obj\Debug\evolution.csproj.CoreCompileInputs.cache
+D:\OneDrive - ss.z\Рофланы\RiderProjects\evolution\evolution\obj\Debug\evolution.exe
+D:\OneDrive - ss.z\Рофланы\RiderProjects\evolution\evolution\obj\Debug\evolution.pdb
