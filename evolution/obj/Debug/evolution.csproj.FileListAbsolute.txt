@@ -1,0 +1,10 @@
+C:\Users\Саня\source\repos\evolution\evolution\obj\Debug\evolution.csprojAssemblyReference.cache
+C:\Users\Саня\source\repos\evolution\evolution\obj\Debug\evolution.Properties.Resources.resources
+C:\Users\Саня\source\repos\evolution\evolution\obj\Debug\evolution.csproj.GenerateResource.cache
+C:\Users\Саня\source\repos\evolution\evolution\obj\Debug\evolution.csproj.CoreCompileInputs.cache
+C:\Users\Саня\source\repos\evolution\evolution\bin\Debug\evolution.exe.config
+C:\Users\Саня\source\repos\evolution\evolution\bin\Debug\evolution.exe
+C:\Users\Саня\source\repos\evolution\evolution\bin\Debug\evolution.pdb
+C:\Users\Саня\source\repos\evolution\evolution\obj\Debug\evolution.exe
+C:\Users\Саня\source\repos\evolution\evolution\obj\Debug\evolution.pdb
+C:\Users\Саня\source\repos\evolution\evolution\obj\Debug\evolution.Form1.resources
