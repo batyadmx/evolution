@@ -36,7 +36,8 @@ namespace evaluateKsam
         public Image CarPic;
         public float X;
         public float Y;
-        public int Size;
+        public int SizeX;
+        public int SizeY;
         public float Speed;
         private readonly string _path;
         
@@ -46,13 +47,16 @@ namespace evaluateKsam
             CarPic = new Bitmap(_path + "\\sprites2\\car.png");
             X = x;
             Y = y;
-            Size = 50;
+            SizeX = 21;
+            SizeY = 50;
             Speed = 0.01f;
         }
 
-        public AsDemo()
+        public bool AsDemo(Border border1, Border border2)
         {
-            if (X => )
+            if (X <= border1.X + 50 || X >= border2.X)
+                return true;
+            return X >= 800 || X <= 0 || Y >= 800 || Y <= 0;
         }
     }
     
@@ -73,11 +77,13 @@ namespace evaluateKsam
             Invalidate();
         }
 
-        public void Init()
+        private void Init()
         {
             car = new Car(400, 750);
             border1 = new Border(250, 0);
             border2 = new Border(550, 0);
+
+            var flag = true;
 
             speed = 0;
             angle = 0.0f;
@@ -89,6 +95,8 @@ namespace evaluateKsam
             timer1.Start();
             timer1.Tick += (sender, e) =>
             {
+                if (car.AsDemo(border1, border2))
+                    flag = false;
                 speed += car.Speed;
                 var angleRad = (Math.PI / 180) * angle;
                 var g = Math.Sqrt(speed * speed + speed * speed);
@@ -98,22 +106,22 @@ namespace evaluateKsam
                 var k = rand.Next(0, 3);
                 switch (k)
                 {
-                    case 0:
+                    case 0: 
                         angleVal += 0.1f;
                         break;
                     case 1:
                         angleVal += -0.1f;
                         break;
                 }
-
                 Invalidate();
             };
             Paint += (sender, args) =>
             {
+                if (!flag) return;
                 args.Graphics.TranslateTransform(car.X, car.Y);
                 args.Graphics.RotateTransform(angle);
                 args.Graphics.TranslateTransform(-car.X, -car.Y);
-                args.Graphics.DrawImage(car.CarPic, car.X, car.Y, car.Size, car.Size);
+                args.Graphics.DrawImage(car.CarPic, car.X, car.Y, car.SizeX, car.SizeY);
             };
         }
         
