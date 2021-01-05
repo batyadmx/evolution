@@ -13,19 +13,22 @@ namespace evolution
     public partial class Form1 : Form
     {
         Car car;
+        Checkpoint checkpoint;
         public Form1()
         {
-            Width = 800;
-            Height = 800;
-            car = new Car(new Point(Width/2, Height/2));
+            WindowState = FormWindowState.Maximized;
+            InitializeComponent();
+            checkpoint = new Checkpoint(new Point(Width / 2, 50), 40, 40);
+            car = new Car(new Point(Width / 2, Height - 100), 50, 30);
             InitPaint();
             InitControl();
-            InitializeComponent();
             var timer = new Timer();
             timer.Interval = 4;
             timer.Tick += (x, e) => { 
                 Invalidate(); 
-                car.Update();
+                car.Update(Width, Height);
+                if (car.IsDead)
+                   timer.Stop();
             };
             timer.Start();
         }
@@ -34,11 +37,13 @@ namespace evolution
         { 
             Paint += (x, e) =>
             {
-                var img = Image.FromFile(@"C:\Users\Саня\source\repos\evolution\evolution\car.png");
-                e.Graphics.DrawString(car.angle.ToString(), new Font("Arial", 16), Brushes.Black, 0, 0);
-                e.Graphics.TranslateTransform(car.Pos.X, car.Pos.Y);
-                e.Graphics.RotateTransform((float)car.angle * 57);
-                e.Graphics.DrawImage(img, -25, -15);               
+                var cpImg = Image.FromFile(Environment.CurrentDirectory + @"\checkpoint.png");
+                e.Graphics.DrawString(Width + " " + Height, new Font("Aerial", 16), Brushes.Black, 15, 15);
+                e.Graphics.DrawImage(cpImg, checkpoint.Pos.X - checkpoint.Width / 2, checkpoint.Pos.Y - checkpoint.Height / 2);
+                var carimg = Image.FromFile(Environment.CurrentDirectory + @"\car.png");              
+                e.Graphics.TranslateTransform(car.Origin.X, car.Origin.Y);              
+                e.Graphics.RotateTransform((float)car.angle * 57);            
+                e.Graphics.DrawImage(carimg, -25, -15);               
             };
         }
 
@@ -68,9 +73,9 @@ namespace evolution
                         if (key == Keys.S)
                             car.AddVel(true);
                         if (key == Keys.A && car.vel != 0)
-                            car.Rotate(true);
+                            car.Rotate(true, car.vel < 0);
                         if (key == Keys.D && car.vel != 0)
-                            car.Rotate(false);
+                            car.Rotate(false, car.vel < 0);
                     }
                 }
             };
@@ -79,25 +84,29 @@ namespace evolution
 
         public class Car
         {
+            public bool IsDead;
             private float maxVelocity;
-            public PointF Pos;
+            public PointF Origin;
             public float vel;
             public double angle;
-            private Point accel;
+            public int Length;
+            public int Width;
 
-            public Car(PointF pos)
+            public Car(PointF pos, int width, int length)
             {
-                this.Pos = pos;
-                accel = new Point();
+                this.Origin = pos;
                 vel = 0;
-                angle = 0;
+                angle = -Math.PI / 2;
                 maxVelocity = 7;
+                Width = width;
+                Length = length;
             }
 
-            public void Update()
+            public void Update(int w, int h)
             {
-                Pos.X += (float)Math.Cos(angle) * vel;
-                Pos.Y += (float)Math.Sin(angle) * vel;
+                Origin.X += (float)Math.Cos(angle) * vel;
+                Origin.Y += (float)Math.Sin(angle) * vel;
+                IsInside(w, h);
             }
 
             public void AddVel(bool back)
@@ -112,32 +121,74 @@ namespace evolution
                 }
             }
 
-            public void Rotate(bool left)
+            public void Rotate(bool left, bool back)
             {
-                angle += left ? -5f / 57 : 5f / 57;
+                if (back)
+                {
+                    angle += left ? 5f / 57 : -5f / 57;
+                }
+                else
+                    angle += left ? -5f / 57 : 5f / 57;
                 angle %= 2 * Math.PI;
             }
 
             public void Break()
             {
                 if (vel > 0)
-                    vel -= 0.5f;
+                    vel -= 0.25f;
                 else if (vel < 0)
-                    vel += 0.5f;
+                    vel += 0.25f;
+            }
+
+            public PointF[] GetVertexes()
+            {
+                var res = new List<PointF>();
+                var temp = new int[] { -1, 1 };
+                foreach(var el in temp)
+                {
+                    foreach(var el2 in temp)
+                    {
+                        var x1 = (Width / 2 - 4) * el * Math.Cos(angle) + (Length / 2 - 4) * el2 * -Math.Sin(angle);
+                        var y1 = (Width / 2 - 4) * el * Math.Sin(angle) + (Length / 2 - 4) * el2 * Math.Cos(angle);
+                        res.Add(new PointF((float)x1 + Origin.X, (float)y1 + Origin.Y));
+                    }
+                }
+                return res.ToArray();
+            }
+
+            public void IsInside(int w, int h)
+            {
+                foreach (var p in GetVertexes())
+                    if (!Geometry.IsInside(p, w, h))
+                        IsDead = true;
             }
         }
 
         public static class Geometry
         {
-            public static void IsCollided()
+            public static void ColDet()
             {
 
+            }
+
+            public static bool IsInside(PointF p, int width, int height)
+            {
+                return p.X >= 0 && p.X < width && p.Y >= 0 && p.Y < height;
             }
         }
 
         public class Checkpoint
         {
-            Point pos;
+            public Point Pos;
+            public int Width;
+            public int Height;
+
+            public Checkpoint(Point pos, int width, int height)
+            {
+                Pos = pos;
+                Width = width;
+                Height = height;
+            }
         }
     }
 }
